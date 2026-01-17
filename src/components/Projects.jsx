@@ -7,23 +7,23 @@ const Projects = () => {
   const projects = [
     {
       title: "FitBill - Gym Management System",
-      description: "A comprehensive cross-platform solution designed for modern gym businesses that streamlines membership management, attendance tracking, and financial operations. The system automatically sends timely membership renewal notifications, monitors daily facility usage patterns, and provides insightful financial analytics through intuitive dashboards, enabling gym owners to make data-driven decisions and optimize operational efficiency.",
-      tech: ["React Native", "Express.js", "Prisma", "SQL", "AWS Lambda"],
-      image: "/images/fitbill-preview.png",
-      liveLink: "http://youtube.com/watch?v=Dbkf_2kh1ho",
+      description: "A comprehensive cross-platform mobile solution for modern gym businesses that streamlines membership management, attendance tracking, and financial operations. Features automated membership renewal notifications, daily check-in/check-out monitoring, and insightful financial analytics through intuitive dashboards.",
+      tech: ["React Native", "Express.js", "Prisma", "PostgreSQL", "AWS Lambda"],
+      demoLink: "http://youtube.com/watch?v=Dbkf_2kh1ho",
+      githubLink: "",
       highlights: [
         "Automated membership renewal alerts",
         "Daily check-in/check-out tracking",
-        "Financial dashboards",
+        "Financial dashboards with analytics",
         "Supports hundreds of daily active users"
       ]
     },
     {
       title: "Student Attendance Tracking System",
-      description: "An innovative serverless attendance solution leveraging AWS Lambda and Python to deliver cost-effective, real-time attendance tracking for educational institutions. The system employs sophisticated HTML parsing techniques with BeautifulSoup to extract attendance data from various sources, processes it through a highly optimized pipeline, and delivers accurate, instantaneous results to thousands of users daily without incurring operational costs, making it an ideal solution for resource-constrained educational environments.",
+      description: "A serverless attendance solution leveraging AWS Lambda and Python for cost-effective, real-time attendance tracking. Uses HTML parsing with BeautifulSoup to extract data from various sources and delivers accurate results to thousands of users daily at zero operational cost.",
       tech: ["AWS Lambda", "Python", "WebSocket", "DynamoDB", "BeautifulSoup"],
-      image: "/images/attendance-preview.png",
-      liveLink: "https://github.com/sri-ganeshk/Attendance_tracker",
+      demoLink: "",
+      githubLink: "https://github.com/sri-ganeshk/Attendance_tracker",
       highlights: [
         "Handles ~3,000 unique daily users",
         "10,000+ requests/day at zero cost",
@@ -32,42 +32,42 @@ const Projects = () => {
       ]
     },
     {
-      title: "StudySphere – Curated Learning Platform",
-      description: "An advanced educational platform that revolutionizes self-paced learning through AI-powered content organization and generation. StudySphere allows users to curate and structure courses on any topic with intelligent assistance, automatically generating customized flashcards, comprehensive notes, and interactive quizzes tailored to individual learning preferences. The integration with Google Gemini API enables sophisticated content summarization and knowledge extraction, creating a personalized learning experience that adapts to users' comprehension levels and learning styles.",
+      title: "StudySphere - Curated Learning Platform",
+      description: "An AI-powered educational platform that revolutionizes self-paced learning through intelligent content organization. Automatically generates customized flashcards, comprehensive notes, and interactive quizzes using Google Gemini API for content summarization and knowledge extraction.",
       tech: ["Next.js", "Prisma", "Google Gemini API", "TailwindCSS", "PostgreSQL"],
-      image: "/images/studysphere-preview.png",
-      liveLink: "https://hackthon-six.vercel.app/",
+      demoLink: "https://hackthon-six.vercel.app/",
+      githubLink: "",
       highlights: [
-        "Automatic flashcards & notes generation",
-        "On-the-fly quizzes",
-        "AI-powered content summarization",
-        "Self-paced, structured learning"
+        "AI-powered flashcards & notes generation",
+        "Dynamic quiz generation",
+        "Intelligent content summarization",
+        "Self-paced, structured learning paths"
       ]
     },
     {
       title: "Movie Review Platform",
-      description: "A modern, fully responsive web application designed for movie enthusiasts to discover, review, and engage with film content. The platform leverages The Movie Database API to provide users with real-time access to a vast library of films, complete with detailed information and high-quality imagery. With a robust user authentication system using JWT tokens, the application delivers personalized experiences allowing users to create accounts, save favorites, and contribute their own reviews to the community. The intuitive interface, built with React and styled with Tailwind CSS, ensures a seamless viewing experience across all devices.",
-      tech: ["React", "Tailwind CSS", "TMDB API", "MongoDB", "JWT", "Responsive Design"],
-      image: "/images/movie-review-preview.png",
-      liveLink: "https://movie-review-omega-seven.vercel.app/",
+      description: "A modern, fully responsive web application for movie enthusiasts to discover, review, and engage with film content. Integrates with The Movie Database API for real-time movie data and features secure JWT-based authentication for personalized user experiences.",
+      tech: ["React", "Node.js", "MongoDB", "TMDB API", "JWT", "Tailwind CSS"],
+      demoLink: "https://movie-review-omega-seven.vercel.app/",
+      githubLink: "",
       highlights: [
-        "Real-time movie data integration with TMDB API",
-        "Secure JWT-based user authentication",
-        "Intuitive and fully responsive design",
-        "Personalized user experiences with saved preferences"
+        "Real-time TMDB API integration",
+        "Secure JWT authentication",
+        "Fully responsive design",
+        "User favorites and review system"
       ]
     },
     {
       title: "Pressure Cooker Whistle Counter",
-      description: "An innovative Android application born from everyday necessity, designed to automate the mundane task of counting pressure cooker whistles during cooking. This offline-first app utilizes sophisticated audio processing algorithms to detect and count whistles in real-time using the device's microphone, without requiring an internet connection. With a focus on privacy, the application processes all audio data locally and on-the-fly without storing any recordings. The implementation includes custom sound analysis using Fast Fourier Transform (FFT) and Tarsos DSP library to accurately identify the distinctive whistle frequency pattern amid background noise, making cooking precision effortless for users.",
-      tech: ["Java", "Kotlin", "FFT", "Tarsos DSP", "Spectrograms", "Android Media"],
-      image: "/images/whistle-counter-preview.png",
-      liveLink: "",
+      description: "An innovative offline-first Android app that automates counting pressure cooker whistles during cooking. Uses sophisticated audio processing with FFT and Tarsos DSP library to detect whistles in real-time without storing any audio data, ensuring complete privacy.",
+      tech: ["Java", "Kotlin", "FFT", "Tarsos DSP", "Android Audio API"],
+      demoLink: "",
+      githubLink: "",
       highlights: [
-        "Offline operation for areas with limited connectivity",
+        "Offline operation with no internet required",
         "Privacy-focused with no data storage",
-        "Real-time audio processing and frequency analysis",
-        "Future ML integration for multi-cooker scenarios"
+        "Real-time audio frequency analysis",
+        "Accurate whistle detection amid background noise"
       ]
     }
   ];
@@ -221,19 +221,34 @@ const Projects = () => {
                 </div>
               </div>
 
-              {projects[activeProject].liveLink && (
-                <div className="mt-6 md:mt-8 flex justify-center md:justify-end">
-                  <a 
-                    href={projects[activeProject].liveLink}
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="font-mono text-xs inline-flex items-center px-5 py-2 md:px-6 md:py-2 border border-light hover:bg-light hover:bg-opacity-5 transition-all duration-300 group"
-                  >
-                    VIEW PROJECT
-                    <svg className="ml-2 w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                  </a>
+              {(projects[activeProject].demoLink || projects[activeProject].githubLink) && (
+                <div className="mt-6 md:mt-8 flex flex-wrap gap-3 justify-center md:justify-end">
+                  {projects[activeProject].demoLink && (
+                    <a 
+                      href={projects[activeProject].demoLink}
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="font-mono text-xs inline-flex items-center px-5 py-2 md:px-6 md:py-2 border border-light hover:bg-light hover:bg-opacity-10 transition-all duration-300 group"
+                    >
+                      VIEW DEMO
+                      <svg className="ml-2 w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                  )}
+                  {projects[activeProject].githubLink && (
+                    <a 
+                      href={projects[activeProject].githubLink}
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="font-mono text-xs inline-flex items-center px-5 py-2 md:px-6 md:py-2 border border-light hover:bg-light hover:bg-opacity-10 transition-all duration-300 group"
+                    >
+                      VIEW CODE
+                      <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                      </svg>
+                    </a>
+                  )}
                 </div>
               )}
             </motion.div>
