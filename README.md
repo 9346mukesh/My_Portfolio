@@ -1,12 +1,144 @@
-# React + Vite
+# 🚀 Mukesh Kumar Reddy – Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my professional personal portfolio website built to showcase my skills, projects, and experience as a full-stack developer.  
+The portfolio is designed with a clean UI, responsive layout, and modern web design principles to create a strong first impression for recruiters and collaborators.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
 
-## Expanding the ESLint configuration
+🔗 https://remarkable-llama-d50c3d.netlify.app/
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Deployed using **Netlify (Free Open-Source Cloud Platform)**.
+
+---
+
+## 📌 Overview
+
+A developer portfolio acts as a digital identity and interactive resume.  
+This project highlights my technical expertise, featured projects, and contact information through a structured and responsive web interface.
+
+The objective of this portfolio is to:
+
+- Present professional branding
+- Showcase real-world projects
+- Display technical skills clearly
+- Enable easy recruiter navigation
+
+---
+
+## ⭐ Key Features
+
+- Fully Responsive Design (Mobile + Desktop)
+- Clean and Modern UI
+- Smooth Scrolling Navigation
+- Project Showcase Section
+- Skills Overview
+- Contact & Social Media Links
+- Fast Static Hosting via Netlify
+
+---
+
+## 🛠 Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript
+- Netlify (Deployment & Hosting)
+
+---
+
+## 🏗 Architecture
+
+This portfolio follows a lightweight static frontend architecture:
+
+    Frontend (HTML + CSS + JavaScript)
+        │
+        ▼
+     Static Website
+        │
+        ▼
+    Netlify Cloud Hosting
+
+---
+
+## 📁 Project Structure
+
+    My_Portfolio/
+    │
+    ├── index.html
+    ├── style.css
+    ├── script.js
+    │
+    ├── assets/
+    │   ├── images/
+    │   └── icons/
+    │
+    └── README.md
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the Repository
+
+    git clone https://github.com/9346mukesh/My_Portfolio.git  
+    cd My_Portfolio
+
+### 2️⃣ Run Locally
+
+Simply open:
+
+index.html
+
+in your browser.
+
+No package installation or backend setup required.
+
+---
+
+## 🚀 Deployment
+
+This project is deployed using **Netlify Free Hosting**:
+
+1. Push code to GitHub
+2. Connect repository to Netlify
+3. Deploy automatically
+4. Netlify generates a live domain
+
+Live URL:
+https://remarkable-llama-d50c3d.netlify.app/
+
+---
+
+## 🎯 Purpose of This Portfolio
+
+This portfolio demonstrates:
+
+- Frontend Development Skills
+- UI/UX Design Understanding
+- Personal Branding
+- Clean Code Structure
+- Deployment Knowledge using Cloud Platforms
+
+---
+
+## 🔮 Future Enhancements
+
+- Dark / Light Theme Toggle
+- Animations using AOS or GSAP
+- Blog or Case Study Section
+- SEO Optimization
+- Performance Improvements (Lighthouse 95+ Score)
+
+---
+
+## 👨‍💻 Author
+
+Mukesh Kumar Reddy  
+B.Tech – Computer Science & Engineering  
+Aspiring Full-Stack Developer
+
+---
+
+⭐ If you like this project, consider giving it a star!
