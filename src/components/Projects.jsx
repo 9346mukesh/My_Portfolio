@@ -6,6 +6,21 @@ const Projects = () => {
 
   const projects = [
     {
+      title: "RideShare Pro – Vehicle Tracking System Using GPS",
+      description:
+        "A full-stack ride-sharing and vehicle tracking platform with real-time GPS monitoring, role-based dashboards, and trip management workflows.",
+      tech: ["Python", "Flask", "SQLite", "HTML", "JavaScript", "CSS"],
+      image: "/images/vehicle-tracking.png",
+      liveLink:
+        "https://github.com/9346mukesh/Vehicle-Tracking-System-Using-GPS-Tracking",
+      highlights: [
+        "Real-time vehicle and ride tracking",
+        "Role-based dashboards for admin, driver, and customer",
+        "Ride booking, assignment, and status updates",
+        "Integrated database-backed user and trip management"
+      ]
+    },
+    {
       title: "InventoTrack – Inventory Management System",
       description:
         "A full-stack inventory management system designed to track products, manage stock levels, and streamline inventory operations for small to medium businesses.",
