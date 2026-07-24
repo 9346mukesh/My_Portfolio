@@ -1,195 +1,125 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Avatar from './Avatar'; // Added import
-
-const DottedText = ({ text }) => {
-  const letters = text.split('');
-
-  return (
-    <div className="pixelated-text">
-      {letters}
-    </div>
-  );
-};
+import Avatar from './Avatar';
 
 const Hero = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const highlights = ['Full-stack Projects', 'Data Analytics', 'Machine Learning', 'Open to Collaboration'];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
-  };
-
-  const formatDate = (date) => {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-  };
-
-  const sections = ['home', 'projects', 'skills', 'education'];
-
-  const scrollToSection = (id) => {
-    document.getElementById(id).scrollIntoView({
-      behavior: 'smooth'
-    });
-  };
+  const stats = [
+    { label: 'Projects built', value: '10+' },
+    { label: 'DSA problems solved', value: '250+' },
+    { label: 'Current focus', value: 'Web + Data' },
+    { label: 'Learning goal', value: 'AI solutions' },
+  ];
 
   return (
-    <section id="home" className="h-screen flex items-center relative overflow-hidden">
-      {/* Background elements */}
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-2 py-20 sm:px-0">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
-          className="absolute left-1/3 top-1/4 w-72 h-72 rounded-full bg-gradient-to-tr from-[#202020] to-transparent opacity-30 blur-xl"
-          animate={{
-            x: [0, 10, 0],
-            y: [0, -10, 0],
-            scale: [1, 1.05, 1]
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
+          className="absolute left-[10%] top-[20%] h-72 w-72 rounded-full bg-gradient-to-tr from-[#202020] to-transparent opacity-30 blur-3xl"
+          animate={{ x: [0, 12, 0], y: [0, -12, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse' }}
         />
         <motion.div
-          className="absolute right-1/4 bottom-1/3 w-64 h-64 rounded-full bg-gradient-to-bl from-[#252525] to-transparent opacity-20 blur-xl"
-          animate={{
-            x: [0, -15, 0],
-            y: [0, 15, 0],
-            scale: [1, 1.03, 1]
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
+          className="absolute bottom-[15%] right-[8%] h-64 w-64 rounded-full bg-gradient-to-bl from-[#252525] to-transparent opacity-20 blur-3xl"
+          animate={{ x: [0, -15, 0], y: [0, 15, 0], scale: [1, 1.03, 1] }}
+          transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse' }}
         />
       </div>
 
-      {/* Nothing-styled top bar */}
-      <div className="absolute top-0 left-0 right-0 bg-primary bg-opacity-50 flex justify-between items-center px-6 py-1 border-b border-muted border-opacity-10">
-        <div className="font-mono text-xs text-muted">{formatTime(currentTime)}-{formatDate(currentTime)}</div>
-        <div className="font-mono text-xs text-muted">~MUSTURU MUKESH KUMAR REDDY</div>
-      </div>
-
-      <div className="container-custom"> {/* Main container for hero content */}
-
-        {/* Avatar Element - Added Here */}
-        <div className="hidden md:block absolute top-1/2 right-20 lg:right-32 transform -translate-y-1/2 z-10">
-          <Avatar />
-        </div>
-
-        <motion.div
-          className="max-w-3xl"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div variants={childVariants} className="mb-4">
-            <div className="inline-block w-12 h-[1px] bg-muted mr-4 align-middle"></div>
-            <span className="text-muted text-sm font-mono">PORTFOLIO </span>
-          </motion.div>
-
-          {/* Nothing-inspired headline with dotted/pixel effect */}
-          <motion.h1
-            variants={childVariants}
-            className="text-4xl md:text-6xl font-bold mb-8"
+      <div className="container-custom relative z-10">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
           >
-            <div className="mb-2 font-mono text-sm tracking-wider text-muted">HELLO, I'M</div>
-            <div className="nothing-headline font-mono tracking-wide">
-              <DottedText text="MUSTURU MUKESH KUMAR REDDY" />
+            <div className="mb-5 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-muted">
+              <span className="mr-2 h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              Student • Developer • Problem Solver
             </div>
-            <div className="mt-3 text-gradient">Tech Enthusiast & Developer</div>
-          </motion.h1>
 
-          <motion.p
-            variants={childVariants}
-            className="text-muted text-lg md:text-xl mb-10 max-w-xl"
-          >
-            Solving real-world problems through innovative solutions.
-            Eager to apply technical expertise and creativity in dynamic environments.
-          </motion.p>
+            <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              Hello, I’m{' '}
+              <span className="block text-gradient mt-3">MUSTURU MUKESH KUMAR REDDY</span>
+            </h1>
 
-          {/* Social media and resume section */}
-          <motion.div
-            variants={childVariants}
-            className="flex flex-wrap gap-6 mb-12"
-          >
-            <a href="https://github.com/9346mukesh" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted hover:text-light transition-colors">
-              <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.477 2 12C2 16.418 4.865 20.166 8.84 21.49C9.34 21.581 9.522 21.276 9.522 21.008C9.522 20.766 9.513 20.011 9.508 19.172C6.726 19.791 6.143 17.898 6.143 17.898C5.699 16.754 5.064 16.451 5.064 16.451C4.187 15.818 5.131 15.829 5.131 15.829C6.104 15.898 6.626 16.868 6.626 16.868C7.498 18.412 8.974 17.945 9.541 17.687C9.63 17.058 9.888 16.592 10.175 16.32C7.956 16.046 5.62 15.233 5.62 11.477C5.62 10.386 6.01 9.491 6.646 8.787C6.546 8.531 6.202 7.57 6.747 6.181C6.747 6.181 7.563 5.908 9.497 7.211C10.29 7.002 11.151 6.898 12.001 6.894C12.849 6.899 13.71 7.002 14.505 7.211C16.437 5.908 17.252 6.181 17.252 6.181C17.798 7.57 17.454 8.531 17.354 8.787C17.991 9.491 18.379 10.386 18.379 11.477C18.379 15.246 16.038 16.044 13.813 16.313C14.172 16.647 14.492 17.308 14.492 18.313C14.492 19.754 14.479 20.674 14.479 21.007C14.479 21.278 14.659 21.586 15.167 21.49C19.137 20.162 22 16.418 22 12C22 6.477 17.523 2 12 2Z" />
-              </svg>
-              GITHUB
-            </a>
+            <p className="mt-6 max-w-2xl text-lg text-muted sm:text-xl">
+              I’m a Computer Science student building practical web apps, insightful dashboards, and AI-friendly solutions that turn ideas into real-world impact.
+            </p>
 
-            <a href="https://leetcode.com/u/mukesh9963/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted hover:text-light transition-colors">
-              <img src="https://leetcode.com/_next/static/images/logo-dark-c96c407d175e36c81e236fcfdd682a0b.png"
-                alt="LeetCode Logo"
-                className="w-6 h-6" />
-              LEETCODE
-            </a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#projects" className="nothing-btn group">
+                View Projects
+                <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <a href="/Mukesh_Kumar_Reddy_Resume.pdf" target="_blank" rel="noopener noreferrer" className="nothing-btn">
+                Download Resume
+              </a>
+            </div>
 
-            <a href="https://www.linkedin.com/in/mukeshkumarreddy-musturu/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted hover:text-light transition-colors">
-              <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
-              </svg>
-              LINKEDIN
-            </a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {highlights.map((item) => (
+                <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-light/80">
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-5">
+              <a href="https://github.com/9346mukesh" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-light">
+                <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.84 9.49.5.091.682-.196.682-.464 0-.215-.008-.94-.01-1.779-2.782.605-3.365-1.288-3.365-1.288-.444-.87-.98-1.137-.98-1.137-.81-.553.06-.542.06-.542.9.063 1.37.922 1.37.922.79 1.352 2.07 1.92 2.57 1.47.08-.63.31-1.05.56-1.29-2.22-.253-4.556-1.112-4.556-4.95 0-1.09.39-1.985 1.03-2.688-.103-.254-.447-1.274.097-2.654 0 0 .84-.271 2.75 1.026A9.57 9.57 0 0 1 12 6.84c.85.004 1.705.115 2.504.338 1.91-1.297 2.75-1.026 2.75-1.026.545 1.38.201 2.4.098 2.654.64.703 1.03 1.598 1.03 2.688 0 3.847-2.337 4.694-4.566 4.945.36.31.68.926.68 1.866 0 1.35-.012 2.438-.012 2.767 0 .27.18.58.69.482A10 10 0 0 0 22 12c0-5.523-4.477-10-10-10z" />
+                </svg>
+                GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/mukeshkumarreddy-musturu/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-light">
+                <svg className="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.94 8.5A1.56 1.56 0 1 0 6.94 5.38a1.56 1.56 0 0 0 0 3.12zm-1.33 1.1h2.66V18H5.61V9.6zm4.22 0h2.55v1.13h.04c.35-.67 1.22-1.37 2.5-1.37 2.68 0 3.17 1.76 3.17 4.05V18h-2.66v-7.56c0-1.8-.03-4.12-2.51-4.12-2.51 0-2.89 1.96-2.89 3.98V18H9.83V9.6z" />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
-            variants={childVariants}
-            className="flex flex-wrap gap-5"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur"
           >
-            <a href="#projects" className="nothing-btn group">
-              VIEW PROJECTS
-              <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </a>
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-mono uppercase tracking-[0.25em] text-muted">Current focus</p>
+                <p className="mt-2 text-lg font-semibold">Building smart, useful products</p>
+              </div>
+              <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-sm text-emerald-300">
+                Open to opportunities
+              </span>
+            </div>
 
-            <a href="/Mukeshkumarreddy_resume.pdf" target="_blank" rel="noopener noreferrer" className="nothing-btn">
-              RESUME
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-            </a>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {stats.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-white/10 bg-primary/70 p-4">
+                  <p className="text-2xl font-semibold">{stat.value}</p>
+                  <p className="mt-1 text-sm text-muted">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-white/10 bg-secondary/60 p-5">
+              <div className="flex items-center justify-center">
+                <Avatar />
+              </div>
+              <p className="mt-4 text-sm text-muted">
+                I enjoy turning data, design, and code into experiences that feel simple, useful, and polished.
+              </p>
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-
-
     </section>
   );
 };

@@ -7,7 +7,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -16,116 +16,67 @@ const Header = () => {
 
   const navItems = ['Home', 'Projects', 'Skills', 'Education', 'Contact'];
 
-  const headerVariants = {
-    initial: { y: -100 },
-    animate: { y: 0, transition: { type: 'spring', stiffness: 100, damping: 20 } },
-  };
-
-  const navItemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.1 + 0.2, duration: 0.4 }
-    })
-  };
-
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-0 ${scrolled ? 'glassmorphism-no-border py-3' : 'bg-transparent py-6'
-        }`}
-      variants={headerVariants}
-      initial="initial"
-      animate="animate"
-      style={{
-        borderWidth: 0,  // Explicitly setting border width to 0
-        borderStyle: 'none' // Ensuring no border style
-      }}
+      className={`fixed left-0 right-0 top-0 z-50 border-0 transition-all duration-300 ${scrolled ? 'glassmorphism-no-border py-3' : 'bg-transparent py-5'}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0, transition: { type: 'spring', stiffness: 100, damping: 20 } }}
     >
-      <div className="container-custom flex justify-between items-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center"
-        >
-          <div className="w-[2px] h-6 bg-light mr-2"></div>
-          <span className="font-mono text-lg tracking-wider">MMKR</span>
-        </motion.div>
+      <div className="container-custom flex items-center justify-between">
+        <a href="#home" className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold">
+            MK
+          </div>
+          <div className="leading-none">
+            <div className="text-sm font-semibold tracking-[0.25em]">MUKESH</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-muted">Student Developer</div>
+          </div>
+        </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            {navItems.map((item, i) => (
-              <motion.li
-                key={item}
-                custom={i}
-                variants={navItemVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  className="text-sm font-medium hover:text-light transition-colors duration-300"
-                >
-                  {item}
-                </a>
-              </motion.li>
-            ))}
-          </ul>
+        <nav className="hidden items-center gap-6 md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-sm font-medium text-light/80 transition-colors duration-300 hover:text-light"
+            >
+              {item}
+            </a>
+          ))}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="md:hidden text-light p-1"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        <button
+          className="rounded-full border border-white/15 bg-white/5 p-2 text-light md:hidden"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-label="Toggle navigation"
         >
-          <div className="w-6 flex flex-col space-y-1.5">
-            <motion.div
-              className="w-full h-px bg-light"
-              animate={mobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-            <motion.div
-              className="w-full h-px bg-light"
-              animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-            />
-            <motion.div
-              className="w-full h-px bg-light"
-              animate={mobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-            />
+          <div className="flex w-5 flex-col gap-1.5">
+            <span className="h-px w-full bg-light transition-all" style={{ transform: mobileMenuOpen ? 'rotate(45deg) translateY(6px)' : 'none' }} />
+            <span className="h-px w-full bg-light transition-all" style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
+            <span className="h-px w-full bg-light transition-all" style={{ transform: mobileMenuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none' }} />
           </div>
-        </motion.button>
+        </button>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="absolute top-full left-0 w-full bg-secondary py-4 px-6 glassmorphism-no-border md:hidden"
-              style={{ borderWidth: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.2 }}
+              className="absolute left-0 top-full mt-2 w-full border border-white/10 bg-secondary/95 px-6 py-4 shadow-2xl backdrop-blur md:hidden"
             >
-              <ul className="flex flex-col space-y-4">
-                {navItems.map(item => (
-                  <motion.li
-                    key={item}
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
+              <ul className="flex flex-col gap-3">
+                {navItems.map((item) => (
+                  <li key={item}>
                     <a
                       href={`#${item.toLowerCase()}`}
-                      className="text-sm font-medium"
+                      className="block text-sm font-medium text-light/80"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </motion.div>

@@ -13,7 +13,6 @@ import Loader from './components/Loader.jsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => setLoading(false), 2000);
