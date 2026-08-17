@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --scrollbar-thumb: #3a3a3a;
-  --scrollbar-track: #101010;
+  --abyss: #0b0f15;
+  --bone: #e9e6df;
+  --mist: #9aa4b0;
+  --prussian: #5b8fbc;
+  --prussian-deep: #2c4763;
+  --iron: #b27a4f;
 }
 
 * {
@@ -17,95 +19,168 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mist) var(--abyss);
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 28%),
-    #101010;
-  color: #f5f5f5;
-  font-family: 'Inter', sans-serif;
+  background-color: var(--abyss);
+  color: var(--bone);
+  font-family: 'Crimson Pro', Georgia, serif;
   line-height: 1.6;
-  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient console field — a fixed layer behind all glass:
+   faint grid + two slow-breathing glow orbs in the subject's inks. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(233, 230, 223, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 230, 223, 0.028) 1px, transparent 1px),
+    radial-gradient(900px 620px at 18% 8%, rgba(44, 71, 99, 0.5), transparent 65%),
+    radial-gradient(800px 560px at 85% 92%, rgba(178, 122, 79, 0.28), transparent 60%),
+    radial-gradient(700px 520px at 70% 20%, rgba(91, 143, 188, 0.16), transparent 60%),
+    radial-gradient(1000px 800px at 50% 120%, rgba(11, 15, 21, 0.9), transparent 70%);
+  background-size:
+    72px 72px,
+    72px 72px,
+    auto,
+    auto,
+    auto,
+    auto;
+  animation: orbDrift 26s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift {
+  0% {
+    background-position: 0 0, 0 0, 0% 0%, 100% 100%, 100% 0%, 50% 120%;
+  }
+  100% {
+    background-position: 0 0, 0 0, 0% 6%, 100% 94%, 100% 6%, 50% 120%;
+  }
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background: var(--prussian);
+  color: var(--abyss);
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
+  background: var(--abyss);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb);
-  border-radius: 999px;
+  background-color: var(--mist);
+  border: 3px solid var(--abyss);
+  border-radius: 8px;
 }
 
-.glassmorphism-no-border {
-  background: rgba(255, 255, 255, 0.06);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: none !important;
-  box-shadow: none;
-}
-
-.nothing-headline {
-  letter-spacing: -0.02em;
-}
-
-.pixelated-text {
-  font-family: 'JetBrains Mono', monospace;
-  position: relative;
-  display: inline-block;
-  overflow: visible;
-}
-
-.pixelated-text::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 50%, rgba(245, 245, 245, 0.15) 50%);
-  background-size: 4px 4px;
-  pointer-events: none;
-  opacity: 0.4;
+/* Visible, console-toned keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--iron);
+  outline-offset: 3px;
 }
 
 @layer components {
-  .container-custom {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  /* Frosted glass panel */
+  .glass {
+    @apply relative rounded-2xl border border-white/10 bg-white/[0.045] shadow-glass;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+  }
+  /* Heavier panel for text-dense surfaces */
+  .glass--deep {
+    @apply bg-[#0d131c]/70;
   }
 
-  .section-padding {
-    @apply py-16 md:py-24;
+  /* Registration mark — printer's cross in recorded-data ink */
+  .reg-cross {
+    @apply absolute w-3 h-3 pointer-events-none;
+  }
+  .reg-cross::before,
+  .reg-cross::after {
+    content: '';
+    @apply absolute bg-prussian opacity-70;
+  }
+  .reg-cross::before {
+    @apply left-0 top-1/2 h-px w-full -translate-y-1/2;
+  }
+  .reg-cross::after {
+    @apply top-0 left-1/2 w-px h-full -translate-x-1/2;
   }
 
-  .btn {
-    @apply inline-flex items-center justify-center rounded-full px-6 py-2.5 font-medium transition-all duration-300;
+  /* Letterspaced utility label */
+  .eyebrow {
+    @apply font-mono text-[11px] sm:text-xs tracking-plate text-mist uppercase;
   }
 
-  .btn-primary {
-    @apply bg-light text-primary hover:bg-opacity-90;
+  /* Console buttons */
+  .btn-glass {
+    @apply inline-flex items-center gap-2 rounded-lg font-mono text-xs tracking-plate uppercase px-6 py-3 border border-white/15 bg-white/[0.06] text-bone backdrop-blur-md transition-all duration-300 hover:bg-white/[0.12] hover:border-white/25 select-none;
+  }
+  .btn-glass--solid {
+    @apply bg-prussian border-prussian text-abyss font-semibold hover:bg-[#6fa3d0] hover:border-[#6fa3d0] hover:text-abyss;
   }
 
-  .btn-outline {
-    @apply border border-light/40 text-light hover:bg-light/10;
+  /* Small chip for technologies */
+  .chip {
+    @apply inline-block font-mono text-[11px] tracking-wider text-mist border border-white/10 bg-white/[0.05] px-3 py-1 rounded-md transition-colors duration-200 hover:text-bone hover:border-prussian/50;
   }
 
-  .text-gradient {
-    @apply bg-gradient-to-r from-light to-muted bg-clip-text text-transparent;
+  /* Ghost dot substrate */
+  .dot-field {
+    background-image: radial-gradient(rgba(233, 230, 223, 0.09) 1px, transparent 1.5px);
+    background-size: 26px 26px;
   }
 
-  .nothing-btn {
-    @apply inline-flex items-center border border-light/30 bg-transparent px-5 py-2.5 font-mono text-sm tracking-[0.2em] transition-all duration-300 hover:bg-light/10;
+  /* Hairline rule with terminal ticks */
+  .rule {
+    @apply relative h-px bg-white/15;
   }
+  .rule::before,
+  .rule::after {
+    content: '';
+    @apply absolute top-1/2 w-[5px] h-[5px] border border-prussian/60 -translate-y-1/2 bg-abyss;
+  }
+  .rule::before {
+    @apply -left-[2px];
+  }
+  .rule::after {
+    @apply -right-[2px];
+  }
+}
 
-  .social-icon {
-    @apply h-6 w-6 text-muted transition-colors duration-300 hover:text-light;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  body::before {
+    animation: none;
+  }
+}
+
+/* Hide scrollbar for horizontal selectors (keeps snap scrolling) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

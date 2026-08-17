@@ -1,88 +1,131 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const NAV = [
+  { id: 'home', label: 'HOME', plate: 'I' },
+  { id: 'projects', label: 'WORKS', plate: 'II' },
+  { id: 'skills', label: 'EXPERTISE', plate: 'III' },
+  { id: 'education', label: 'RECORD', plate: 'IV' },
+  { id: 'contact', label: 'CONTACT', plate: 'V' },
+];
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = ['Home', 'Projects', 'Skills', 'Education', 'Contact'];
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
   return (
     <motion.header
-      className={`fixed left-0 right-0 top-0 z-50 border-0 transition-all duration-300 ${scrolled ? 'glassmorphism-no-border py-3' : 'bg-transparent py-5'}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0, transition: { type: 'spring', stiffness: 100, damping: 20 } }}
+      initial={{ y: -64, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled || open
+          ? 'bg-abyss/70 backdrop-blur-xl border-b border-white/10'
+          : 'bg-transparent border-b border-transparent'
+      }`}
     >
-      <div className="container-custom flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold">
-            MK
-          </div>
-          <div className="leading-none">
-            <div className="text-sm font-semibold tracking-[0.25em]">MUKESH</div>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-muted">Student Developer</div>
-          </div>
+      <div className="container-custom flex items-center justify-between h-16 md:h-[72px]">
+        {/* Monogram with registration mark */}
+        <a href="#home" className="flex items-center gap-3 group" aria-label="Back to top">
+          <span className="relative flex items-center justify-center w-8 h-8 rounded-lg border border-white/20 bg-white/[0.04]">
+            <span className="absolute inset-0 m-auto w-px h-5 bg-prussian/70" />
+            <span className="absolute inset-0 m-auto h-px w-5 bg-prussian/70" />
+            <span className="w-1.5 h-1.5 bg-prussian group-hover:bg-iron transition-colors rounded-[1px]" />
+          </span>
+          <span className="font-mono text-sm tracking-plate text-bone">
+            MMKR<span className="text-prussian">·</span>26
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {navItems.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-sm font-medium text-light/80 transition-colors duration-300 hover:text-light"
-            >
-              {item}
-            </a>
-          ))}
+        {/* Desktop nav */}
+        <nav className="hidden md:block" aria-label="Primary">
+          <ul className="flex items-center gap-8">
+            {NAV.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className="group relative font-mono text-[11px] tracking-plate text-mist hover:text-bone transition-colors py-2"
+                >
+                  <span className="text-prussian mr-2">{item.plate}</span>
+                  {item.label}
+                  <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-iron group-hover:w-full transition-all duration-300" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
+        {/* Mobile toggle */}
         <button
-          className="rounded-full border border-white/15 bg-white/5 p-2 text-light md:hidden"
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-          aria-label="Toggle navigation"
+          className="md:hidden relative z-50 w-10 h-10 rounded-lg border border-white/10 bg-white/[0.04] flex flex-col items-center justify-center gap-1.5"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-label={open ? 'Close menu' : 'Open menu'}
         >
-          <div className="flex w-5 flex-col gap-1.5">
-            <span className="h-px w-full bg-light transition-all" style={{ transform: mobileMenuOpen ? 'rotate(45deg) translateY(6px)' : 'none' }} />
-            <span className="h-px w-full bg-light transition-all" style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
-            <span className="h-px w-full bg-light transition-all" style={{ transform: mobileMenuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none' }} />
-          </div>
+          <span className={`block w-5 h-px bg-bone transition-all duration-300 ${open ? 'rotate-45 translate-y-[3.5px]' : ''}`} />
+          <span className={`block w-5 h-px bg-bone transition-all duration-300 ${open ? '-rotate-45 -translate-y-[3.5px]' : ''}`} />
         </button>
+      </div>
 
+      {/* Mobile overlay — portaled to <body> so no transformed ancestor
+          becomes its containing block and collapses it. */}
+      {createPortal(
         <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.2 }}
-              className="absolute left-0 top-full mt-2 w-full border border-white/10 bg-secondary/95 px-6 py-4 shadow-2xl backdrop-blur md:hidden"
-            >
-              <ul className="flex flex-col gap-3">
-                {navItems.map((item) => (
-                  <li key={item}>
+          {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden fixed inset-0 top-16 bg-abyss/85 backdrop-blur-2xl z-40"
+          >
+            <div className="absolute inset-4 pointer-events-none">
+              <span className="reg-cross -top-1.5 -left-1.5" />
+              <span className="reg-cross -top-1.5 -right-1.5" />
+              <span className="reg-cross -bottom-1.5 -left-1.5" />
+              <span className="reg-cross -bottom-1.5 -right-1.5" />
+            </div>
+            <nav className="relative h-full flex flex-col justify-center px-10" aria-label="Mobile">
+              <ul className="space-y-2">
+                {NAV.map((item, i) => (
+                  <motion.li
+                    key={item.id}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 * i, duration: 0.4 }}
+                  >
                     <a
-                      href={`#${item.toLowerCase()}`}
-                      className="block text-sm font-medium text-light/80"
-                      onClick={() => setMobileMenuOpen(false)}
+                      href={`#${item.id}`}
+                      onClick={() => setOpen(false)}
+                      className="flex items-baseline gap-4 py-3 border-b border-white/10 group"
                     >
-                      {item}
+                      <span className="font-mono text-xs tracking-plate text-prussian">{item.plate}</span>
+                      <span className="font-display text-3xl text-bone group-hover:text-prussian transition-colors">
+                        {item.label.charAt(0) + item.label.slice(1).toLowerCase()}
+                      </span>
                     </a>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </motion.div>
+              <p className="eyebrow mt-10">AN ATLAS OF A WORKING LIFE · VOL. I</p>
+            </nav>
+          </motion.div>
           )}
-        </AnimatePresence>
-      </div>
+        </AnimatePresence>,
+        document.body
+      )}
     </motion.header>
   );
 };

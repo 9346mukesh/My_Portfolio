@@ -12,7 +12,7 @@ export default function ResumeRedirect() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-primary text-accent">
+    <div className="flex items-center justify-center min-h-screen bg-abyss text-bone">
       <div className="text-center">
         <p className="text-lg">Redirecting to resume...</p>
       </div>
