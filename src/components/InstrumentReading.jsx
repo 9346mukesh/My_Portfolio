@@ -58,7 +58,7 @@ const InstrumentReading = ({ title, className = '' }) => {
   return (
     <div className={`rounded-xl border border-white/10 bg-white/[0.03] p-4 ${className}`}>
       <div className="flex items-center justify-between mb-2">
-        <span className="eyebrow">INSTRUMENT READING</span>
+        <span className="eyebrow">PROJECT SIGNAL</span>
         <span className="eyebrow text-prussian">R-{seed}</span>
       </div>
       <svg viewBox="0 0 320 120" className="w-full h-auto block" aria-hidden="true">
@@ -81,7 +81,7 @@ const InstrumentReading = ({ title, className = '' }) => {
         />
       </svg>
       <div className="flex justify-between mt-2">
-        <span className="eyebrow">40 SAMPLES · DAILY</span>
+        <span className="eyebrow">40 SAMPLES · AUTO</span>
         <span className="eyebrow">SCALE 1:1</span>
       </div>
     </div>

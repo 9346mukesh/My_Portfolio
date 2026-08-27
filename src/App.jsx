@@ -5,7 +5,9 @@ import ResumeRedirect from './components/ResumeRedirect.jsx';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
 import Projects from './components/Projects.jsx';
+import About from './components/About.jsx';
 import Skills from './components/Skills.jsx';
+import Experience from './components/Experience.jsx';
 import Education from './components/Education.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
@@ -15,7 +17,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // A quick "glass press" — brief, not a fake wait.
     const timer = setTimeout(() => setLoading(false), 700);
     return () => clearTimeout(timer);
   }, []);
@@ -38,13 +39,15 @@ function App() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-abyss text-bone min-h-screen"
+                    className="bg-bg text-bone min-h-screen"
                   >
                     <Header />
                     <main>
                       <Hero />
                       <Projects />
+                      <About />
                       <Skills />
+                      <Experience />
                       <Education />
                       <Contact />
                     </main>

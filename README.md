@@ -1,7 +1,7 @@
 # 🚀 Mukesh Kumar Reddy – Developer Portfolio
 
-This is my professional personal portfolio website built to showcase my skills, projects, and experience as a full-stack developer.  
-The portfolio is designed with a clean UI, responsive layout, and modern web design principles to create a strong first impression for recruiters and collaborators.
+This is my professional personal portfolio website built to showcase my skills, projects, and experience as a software engineer and data analyst.  
+The portfolio is positioned for roles across **software development, AI/ML, data (Data Engineer / Data Analyst / Business Analyst), Python full-stack & backend (Python · MERN · Node.js), and Quality Engineering (manual + automation)** — with a clean UI, responsive layout, and modern web design principles to create a strong first impression for recruiters and collaborators.
 
 ---
 
@@ -20,10 +20,11 @@ This project highlights my technical expertise, featured projects, and contact i
 
 The objective of this portfolio is to:
 
-- Present professional branding
-- Showcase real-world projects
+- Present professional branding across all target role tracks
+- Showcase real-world projects in full-stack, ML, data, and BI
 - Display technical skills clearly
 - Enable easy recruiter navigation
+- Signal QA & testing fundamentals for quality engineering roles
 
 ---
 
@@ -137,7 +138,8 @@ This portfolio demonstrates:
 
 Mukesh Kumar Reddy  
 B.Tech – Computer Science & Engineering  
-Aspiring Full-Stack Developer
+Aspiring Software Engineer · Data Analyst · AI/ML Engineer  
+Open to: Software Dev · AI/ML · Data (DA/DE/BA) · Python Full-Stack/Backend (Python · MERN · Node.js) · QA (Manual + Automation)
 
 ---
 

@@ -1,260 +1,139 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import SectionHeader from './SectionHeader';
-import InstrumentReading from './InstrumentReading';
 
 const PROJECTS = [
   {
-    title: "RideShare Pro – Vehicle Tracking System Using GPS",
-    description:
-      "A full-stack ride-sharing and vehicle tracking platform with real-time GPS monitoring, role-based dashboards, and trip management workflows.",
-    tech: ["Python", "Flask", "SQLite", "HTML", "JavaScript", "CSS"],
-    liveLink: "https://github.com/9346mukesh/Vehicle-Tracking-System-Using-GPS-Tracking",
-    highlights: [
-      "Real-time vehicle and ride tracking",
-      "Role-based dashboards for admin, driver, and customer",
-      "Ride booking, assignment, and status updates",
-      "Integrated database-backed user and trip management",
-    ],
+    id: '01',
+    title: 'RideShare Pro',
+    subtitle: 'Vehicle Tracking System Using GPS',
+    description: 'A full-stack ride-sharing and vehicle tracking platform with real-time GPS monitoring, role-based dashboards, and trip management workflows.',
+    discipline: 'FULL STACK',
+    tech: ['Python', 'Flask', 'SQLite', 'HTML', 'JavaScript', 'CSS'],
+    link: 'https://github.com/9346mukesh/Vehicle-Tracking-System-Using-GPS-Tracking',
   },
   {
-    title: "InventoTrack – Inventory Management System",
-    description:
-      "A full-stack inventory management system designed to track products, manage stock levels, and streamline inventory operations for small to medium businesses.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    liveLink: "https://github.com/9346mukesh/inventotrack",
-    highlights: [
-      "Centralized product and stock tracking",
-      "Real-time inventory updates",
-      "CRUD operations for inventory items",
-      "Scalable backend architecture",
-    ],
+    id: '02',
+    title: 'InventoTrack',
+    subtitle: 'Inventory Management System',
+    description: 'A full-stack inventory management system designed to track products, manage stock levels, and streamline inventory operations for small to medium businesses.',
+    discipline: 'FULL STACK',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+    link: 'https://github.com/9346mukesh/inventotrack',
   },
   {
-    title: "Phishing URL Detection System",
-    description:
-      "A machine learning-based cybersecurity application that detects phishing URLs by extracting features and classifying them using supervised learning models.",
-    tech: ["Python", "Flask", "Machine Learning", "Scikit-learn"],
-    liveLink: "https://github.com/9346mukesh/phishing_app",
-    highlights: [
-      "Automated phishing URL classification",
-      "URL feature extraction pipeline",
-      "Real-time predictions using Flask",
-      "Practical cybersecurity use case",
-    ],
+    id: '03',
+    title: 'Phishing URL Detection',
+    subtitle: 'ML-Based Cybersecurity Application',
+    description: 'A machine learning-based cybersecurity application that detects phishing URLs by extracting features and classifying them using supervised learning models.',
+    discipline: 'AI / ML',
+    tech: ['Python', 'Flask', 'Scikit-learn', 'Machine Learning'],
+    link: 'https://github.com/9346mukesh/phishing_app',
   },
   {
-    title: "ResolveX – Issue & Complaint Management System",
-    description:
-      "A web-based issue and complaint management platform that enables users to raise, track, and resolve issues through a structured workflow.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    liveLink: "https://github.com/9346mukesh/ResolveX",
-    highlights: [
-      "Structured issue tracking workflow",
-      "Role-based complaint handling",
-      "Status updates and resolution logs",
-      "Designed for organizational use cases",
-    ],
+    id: '04',
+    title: 'ResolveX',
+    subtitle: 'Issue & Complaint Management',
+    description: 'A web-based issue and complaint management platform that enables users to raise, track, and resolve issues through a structured workflow.',
+    discipline: 'FULL STACK',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+    link: 'https://github.com/9346mukesh/ResolveX',
   },
   {
-    title: "Awesome Chocolate Power BI Dashboard",
-    description:
-      "An interactive Power BI dashboard that analyzes chocolate sales data to uncover revenue trends, performance metrics, and business insights.",
-    tech: ["Power BI", "DAX", "Data Visualization", "Business Intelligence"],
-    liveLink: "https://github.com/9346mukesh/Awesome-Chocolate-Power-BI-Dashboard",
-    highlights: [
-      "Interactive and dynamic dashboards",
-      "Sales and revenue trend analysis",
-      "KPI-based business reporting",
-      "Professional BI visual design",
-    ],
+    id: '05',
+    title: 'Power BI Dashboard',
+    subtitle: 'Chocolate Sales Analytics',
+    description: 'An interactive Power BI dashboard that analyzes chocolate sales data to uncover revenue trends, performance metrics, and business insights.',
+    discipline: 'DATA & BI',
+    tech: ['Power BI', 'DAX', 'Data Visualization', 'Business Intelligence'],
+    link: 'https://github.com/9346mukesh/Awesome-Chocolate-Power-BI-Dashboard',
   },
   {
-    title: "Task Manager Application",
-    description:
-      "A task management web application that helps users organize, track, and manage daily tasks with a clean and intuitive interface.",
-    tech: ["React", "JavaScript", "HTML", "CSS"],
-    liveLink: "https://github.com/9346mukesh/Task_Manager",
-    highlights: [
-      "Task creation and completion tracking",
-      "Clean and minimal UI design",
-      "State management using React hooks",
-      "Improves personal productivity",
-    ],
+    id: '06',
+    title: 'Task Manager',
+    subtitle: 'Productivity Application',
+    description: 'A task management web application that helps users organize, track, and manage daily tasks with a clean and intuitive interface.',
+    discipline: 'FRONTEND',
+    tech: ['React', 'JavaScript', 'HTML', 'CSS'],
+    link: 'https://github.com/9346mukesh/Task_Manager',
   },
   {
-    title: "Zomato Bangalore Restaurant Analysis",
-    description:
-      "A data analytics project analyzing Zomato Bangalore restaurant data to identify trends in ratings, pricing, cuisines, and customer preferences.",
-    tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
-    liveLink: "https://github.com/9346mukesh/zomato-bangalore-analysis",
-    highlights: [
-      "Exploratory Data Analysis (EDA)",
-      "Data cleaning and preprocessing",
-      "Visualization of restaurant trends",
-      "Real-world dataset analysis",
-    ],
+    id: '07',
+    title: 'Zomato Analysis',
+    subtitle: 'Restaurant Data Analytics',
+    description: 'A data analytics project analyzing Zomato Bangalore restaurant data to identify trends in ratings, pricing, cuisines, and customer preferences.',
+    discipline: 'DATA & ML',
+    tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
+    link: 'https://github.com/9346mukesh/zomato-bangalore-analysis',
   },
 ];
 
-const roman = (n) => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'][n - 1] || n;
-
 const Projects = () => {
-  const [active, setActive] = useState(0);
-  const project = PROJECTS[active];
-
   return (
-    <section id="projects" className="section-padding">
+    <section id="work" className="section-padding">
       <div className="container-custom">
         <SectionHeader
-          plate="PLATE II"
-          eyebrow="SELECTED WORKS"
-          title="Projects in the record"
-          note="7 SPECIMENS · INDEXED ON GITHUB · EACH WITH A READING"
+          number="01"
+          eyebrow="SELECTED WORK"
+          title="Projects I've built"
+          note="A COLLECTION OF PROJECTS WHERE I SOLVED REAL PROBLEMS WITH TECHNOLOGY AND DESIGN."
         />
 
-        {/* Mobile selector */}
-        <div className="md:hidden mb-8">
-          <div className="flex items-center justify-between mb-3">
-            <p className="eyebrow">SELECT SPECIMEN</p>
-            <p className="eyebrow text-prussian">
-              {active + 1} / {PROJECTS.length}
-            </p>
-          </div>
-          <div className="flex overflow-x-auto pb-3 snap-x snap-mandatory no-scrollbar">
-            {PROJECTS.map((p, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`snap-start flex-shrink-0 w-[72%] mr-3 text-left p-4 rounded-xl backdrop-blur-md transition-colors ${
-                  active === i
-                    ? 'border border-prussian/50 bg-prussian/10'
-                    : 'border border-white/10 bg-white/[0.04]'
-                }`}
-              >
-                <p className="eyebrow text-prussian mb-1">II.{roman(i + 1)}</p>
-                <h3 className="font-display text-lg text-bone leading-tight">
-                  {p.title.split(' – ')[0]}
-                </h3>
-                <p className="font-mono text-[10px] tracking-wider text-mist mt-1">
-                  {p.tech.slice(0, 3).join(' · ')}
-                </p>
-              </button>
-            ))}
-          </div>
-        </div>
+        <div className="space-y-6">
+          {PROJECTS.map((project, i) => (
+            <motion.a
+              key={project.id}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="group block relative"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 py-8 border-b border-white/10 hover:border-accent/30 transition-colors duration-300">
+                {/* Project number + discipline */}
+                <div className="md:col-span-2 flex md:flex-col gap-3 md:gap-0">
+                  <span className="font-display text-sm font-semibold text-accent">
+                    {project.id}
+                  </span>
+                  <span className="eyebrow">{project.discipline}</span>
+                </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {/* Desktop index */}
-          <motion.div
-            className="hidden md:block md:col-span-4"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="glass p-2">
-              <ol>
-                {PROJECTS.map((p, i) => (
-                  <li key={i}>
-                    <button
-                      onClick={() => setActive(i)}
-                      className={`group w-full text-left py-4 pl-6 pr-4 rounded-xl relative transition-colors ${
-                        active === i ? 'bg-white/[0.06]' : 'hover:bg-white/[0.03]'
-                      }`}
+                {/* Project info */}
+                <div className="md:col-span-7">
+                  <h3 className="font-display text-2xl md:text-3xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-mist mt-1 text-sm md:text-base">
+                    {project.subtitle}
+                  </p>
+                  <p className="text-mist/70 mt-3 max-w-xl text-sm leading-relaxed hidden md:block">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Tech + arrow */}
+                <div className="md:col-span-3 flex flex-col md:items-end justify-between">
+                  <div className="flex flex-wrap gap-2 md:justify-end">
+                    {project.tech.slice(0, 3).map((t) => (
+                      <span key={t} className="chip text-[10px]">{t}</span>
+                    ))}
+                  </div>
+                  <span className="hidden md:inline-flex items-center gap-2 text-mist group-hover:text-accent transition-colors duration-300 text-sm font-display mt-4">
+                    VIEW CASE STUDY
+                    <motion.span
+                      className="inline-block"
+                      animate={{ x: 0 }}
+                      whileHover={{ x: 6 }}
                     >
-                      <span
-                        className={`absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-prussian transition-transform duration-300 origin-top ${
-                          active === i ? 'scale-y-100' : 'scale-y-0'
-                        }`}
-                      />
-                      <span className="flex items-baseline gap-3">
-                        <span className={`font-mono text-[11px] tracking-plate ${active === i ? 'text-prussian' : 'text-mist'}`}>
-                          II.{roman(i + 1)}
-                        </span>
-                        <span className="flex-1">
-                          <span className={`font-display text-lg leading-tight block ${active === i ? 'text-bone' : 'text-mist'}`}>
-                            {p.title.split(' – ')[0]}
-                          </span>
-                          <span className="font-mono text-[10px] tracking-wider text-mist/70 mt-1 block">
-                            {p.tech.slice(0, 3).join(' · ')}
-                          </span>
-                        </span>
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ol>
-              <p className="eyebrow mx-4 my-3 border-t border-white/10 pt-3">INDEX COMPLETE — 7 OF 7</p>
-            </div>
-          </motion.div>
-
-          {/* Specimen detail */}
-          <motion.div className="md:col-span-8" layout>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3 }}
-                className="glass glass--deep p-6 md:p-10"
-              >
-                <span className="reg-cross -top-1.5 -left-1.5" />
-                <span className="reg-cross -top-1.5 -right-1.5" />
-                <span className="reg-cross -bottom-1.5 -left-1.5" />
-                <span className="reg-cross -bottom-1.5 -right-1.5" />
-
-                <div className="flex items-center justify-between mb-4">
-                  <p className="eyebrow text-prussian">SPECIMEN II.{roman(active + 1)}</p>
-                  <p className="eyebrow">STATUS · <span className="text-prussian">SURVEYED</span></p>
+                      →
+                    </motion.span>
+                  </span>
                 </div>
-
-                <h3 className="font-display text-2xl md:text-3xl text-bone leading-tight">
-                  {project.title}
-                </h3>
-                <p className="text-mist mt-4 max-w-2xl">
-                  {project.description}
-                </p>
-
-                <div className="grid md:grid-cols-5 gap-6 mt-8">
-                  <div className="md:col-span-3">
-                    <h4 className="eyebrow mb-4">KEY OBSERVATIONS</h4>
-                    <ul className="space-y-3">
-                      {project.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-3 text-bone/90">
-                          <span className="mt-[0.55em] inline-block w-2 h-2 border border-prussian rotate-45 flex-none" aria-hidden="true" />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="md:col-span-2">
-                    <InstrumentReading title={project.title} />
-                  </div>
-                </div>
-
-                <h4 className="eyebrow mt-8 mb-4">INSTRUMENTS USED</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t, i) => (
-                    <span key={i} className="chip">{t}</span>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
-                  <p className="eyebrow">FIELD NOTES · OPEN-SOURCE · RECORDED MMXXII–MMXXVI</p>
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-glass"
-                  >
-                    VIEW RECORD <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
+              </div>
+            </motion.a>
+          ))}
         </div>
       </div>
     </section>

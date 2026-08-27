@@ -3,24 +3,16 @@ import { motion, useInView } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import SectionHeader from './SectionHeader';
 
-/* Initialize EmailJS once */
 emailjs.init(import.meta.env.VITE_PUBLIC_KEY);
 
-const LEDGER = [
-  { label: 'EMAIL', value: '9346mukeshkumarreddy@gmail.com', href: 'mailto:9346mukeshkumarreddy@gmail.com' },
-  { label: 'PHONE', value: '+91 79814 91191', href: 'tel:+917981491191' },
-  { label: 'LOCATION', value: 'Bengaluru, India', href: null },
-  { label: 'RESPONSE TIME', value: 'Within 1–2 days', href: null },
-];
-
-const SOCIALS = [
-  { label: 'GITHUB', href: 'https://github.com/9346mukesh' },
-  { label: 'LEETCODE', href: 'https://leetcode.com/u/mukesh9963/' },
-  { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/mukeshkumarreddy-musturu/' },
+const CONTACT_LINKS = [
+  { label: 'GitHub', href: 'https://github.com/9346mukesh' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/mukeshkumarreddy-musturu/' },
+  { label: 'Email', href: 'mailto:mukeshredddy0109@gmail.com' },
 ];
 
 const inputClass =
-  'w-full bg-transparent border-0 border-b border-white/15 focus:border-prussian focus:outline-none focus:ring-0 px-0 py-2.5 font-sans text-bone placeholder:text-mist/50 placeholder:italic transition-colors rounded-none';
+  'w-full bg-transparent border-0 border-b border-white/15 focus:border-accent focus:outline-none focus:ring-0 px-0 py-3 font-sans text-bone placeholder:text-mist/40 transition-colors rounded-none';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -59,7 +51,7 @@ const Contact = () => {
       setStatus({
         submitting: false,
         submitted: false,
-        error: 'Transmission failed — please check your details and try again.',
+        error: 'Something went wrong. Please check your details and try again.',
       });
     }
   };
@@ -68,86 +60,59 @@ const Contact = () => {
     <section id="contact" className="section-padding">
       <div className="container-custom" ref={ref}>
         <SectionHeader
-          plate="PLATE V"
-          eyebrow="CORRESPONDENCE"
-          title="Contact"
-          note="REPLY WITHIN 1–2 DAYS · ALL CORRESPONDENCE READ"
+          number="06"
+          eyebrow="CONTACT"
+          title="Let's build something useful."
+          note="HAVE AN INTERESTING PROBLEM, PROJECT, OR OPPORTUNITY? LET'S TALK."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Ledger */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          {/* Left: CTA + links */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="glass glass--deep p-8 relative"
           >
-            <span className="reg-cross -top-1.5 -left-1.5" />
-            <span className="reg-cross -top-1.5 -right-1.5" />
-            <span className="reg-cross -bottom-1.5 -left-1.5" />
-            <span className="reg-cross -bottom-1.5 -right-1.5" />
-            <p className="font-sans italic text-xl text-bone leading-snug">
-              Have a dataset, a dashboard, or a product idea worth surveying?
-              Open a line of correspondence.
+            <p className="text-xl text-bone leading-relaxed mb-10">
+              Have an interesting problem, project, or opportunity? I'd love to hear about it. Whether you're looking for collaboration, have a question, or just want to say hi — my inbox is open.
             </p>
 
-            <div className="mt-10">
-              {LEDGER.map((row) => (
-                <div
-                  key={row.label}
-                  className="flex items-baseline justify-between gap-6 py-4 border-b border-white/10"
-                >
-                  <p className="eyebrow">{row.label}</p>
-                  {row.href ? (
-                    <a
-                      href={row.href}
-                      className="font-mono text-sm text-bone hover:text-prussian transition-colors text-right"
-                    >
-                      {row.value}
-                    </a>
-                  ) : (
-                    <p className="font-mono text-sm text-mist text-right">{row.value}</p>
-                  )}
-                </div>
-              ))}
-            </div>
+            <a href="mailto:mukeshredddy0109@gmail.com" className="btn-primary mb-10">
+              GET IN TOUCH
+              <span aria-hidden="true">→</span>
+            </a>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              {SOCIALS.map((s) => (
+            <div className="space-y-4">
+              {CONTACT_LINKS.map((link) => (
                 <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="chip"
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                  rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                  className="flex items-center justify-between py-4 border-b border-white/10 hover:border-accent/30 transition-colors group"
                 >
-                  {s.label} <span aria-hidden="true">↗</span>
+                  <span className="text-bone font-display text-lg group-hover:text-accent transition-colors">
+                    {link.label}
+                  </span>
+                  <span className="text-mist group-hover:text-accent transition-colors">→</span>
                 </a>
               ))}
             </div>
           </motion.div>
 
-          {/* Form */}
+          {/* Right: Form */}
           <motion.form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="glass glass--deep p-8 relative"
           >
-            <span className="reg-cross -top-1.5 -left-1.5" />
-            <span className="reg-cross -top-1.5 -right-1.5" />
-            <span className="reg-cross -bottom-1.5 -left-1.5" />
-            <span className="reg-cross -bottom-1.5 -right-1.5" />
-
-            <p className="eyebrow mb-8">NEW CORRESPONDENCE — FORM V</p>
-
-            <div className="mb-7">
+            <div className="mb-6">
               <label htmlFor="name" className="eyebrow block mb-2">NAME</label>
               <input
                 id="name"
                 name="name"
-                placeholder="How should I address you?"
+                placeholder="Your name"
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -155,13 +120,13 @@ const Contact = () => {
               />
             </div>
 
-            <div className="mb-7">
+            <div className="mb-6">
               <label htmlFor="email" className="eyebrow block mb-2">EMAIL</label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Where should the reply go?"
+                placeholder="your@email.com"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -175,7 +140,7 @@ const Contact = () => {
                 id="message"
                 name="message"
                 rows="5"
-                placeholder="The subject of our correspondence…"
+                placeholder="Tell me about your project or idea..."
                 value={formData.message}
                 onChange={handleChange}
                 required
@@ -186,18 +151,19 @@ const Contact = () => {
             <button
               type="submit"
               disabled={status.submitting}
-              className="btn-glass btn-glass--solid w-full justify-center disabled:opacity-50"
+              className="btn-primary w-full justify-center disabled:opacity-50"
             >
-              {status.submitting ? 'TRANSMITTING…' : 'SEND CORRESPONDENCE'} <span aria-hidden="true">→</span>
+              {status.submitting ? 'SENDING...' : 'SEND MESSAGE'}
+              <span aria-hidden="true">→</span>
             </button>
 
             {status.submitted && (
-              <p className="mt-5 text-center font-mono text-xs tracking-wider text-prussian">
-                ✓ RECORDED — YOUR MESSAGE IS IN TRANSIT.
+              <p className="mt-5 text-center font-sans text-sm text-accent">
+                ✓ Sent! I'll reply within 1–2 days.
               </p>
             )}
             {status.error && (
-              <p className="mt-5 text-center font-mono text-xs tracking-wider text-iron">
+              <p className="mt-5 text-center font-sans text-sm text-[#c45a3a]">
                 ✗ {status.error}
               </p>
             )}
